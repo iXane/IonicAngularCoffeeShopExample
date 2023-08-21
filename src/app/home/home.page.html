@@ -1,0 +1,38 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Our Coffee Menu</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <!-- Show Loading when getting data -->
+  <div id="loadingText" *ngIf="menuItems.length == 0">
+    Loading...
+  </div>
+
+  <!-- Menu Items -->
+  <ion-grid no-padding *ngIf="menuItems.length > 0">
+    <div text-center class="menu-item-container">
+        <ion-card *ngFor="let item of menuItems" (click)="openMenuItem(item)">
+        <ion-thumbnail>
+          <ion-img [src]="item.img"></ion-img>
+        </ion-thumbnail>
+        <p class="item-name">{{item.name}}</p>
+        <p class="item-price">{{item.price | currency }}</p>
+
+      </ion-card>
+    </div>
+  </ion-grid>
+
+  <!-- Cart Button -->
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button id="cartFabButton" (click)="openCart()">
+      <ion-icon name="cart" style="padding-right: 2%;"></ion-icon> <strong>{{cartItems.length}}</strong>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>
